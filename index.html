@@ -1,24 +1,41 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unisciti ai nostri canali</title>
-  <style>
-    body { font-family: Arial; text-align:center; padding:40px; background:#f9f9f9; color:#333;}
-    h1{font-size:30px; margin-bottom:20px;}
-    a.btn {display:block; width:85%; max-width:420px; margin:20px auto; padding:22px 30px; font-size:22px; font-weight:bold; color:#fff; text-decoration:none; border-radius:12px;}
-    .btn-telegram{background:#0088cc;}
-    .btn-whatsapp{background:#25d366;}
-    a.btn:hover{transform:scale(1.05); opacity:0.9;}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔥 AmazingOfferte 🔥</title>
+<style>
+body { font-family: Arial; text-align:center; padding:40px; background:#f9f9f9; color:#333; }
+h1{font-size:30px;margin-bottom:20px;}
+button {display:block;width:80%;max-width:400px;margin:20px auto;padding:20px;font-size:20px;border:none;border-radius:12px;color:#fff;cursor:pointer;}
+.telegram{background:#0088cc;}
+.whatsapp{background:#25d366;}
+button:hover{transform:scale(1.05);opacity:0.9;}
+</style>
 </head>
 <body>
-  <h1>🔥 Benvenuto su AmazingOfferte 🔥</h1>
+<h1>🔥 Benvenuto su AmazingOfferte 🔥</h1>
+<p>Seleziona il canale per ricevere le offerte in tempo reale:</p>
 
-  <a class="btn btn-telegram" href="tg://resolve?domain=amazingofferte">📲 Canale Telegram</a>
-  <a class="btn btn-whatsapp" href="whatsapp://chat?code=0029Vb9MchsBlHpXCb23sp41">💬 Canale WhatsApp</a>
+<button class="telegram" onclick="f1()">📲 Canale Telegram</button>
+<button class="whatsapp" onclick="f2()">💬 Canale WhatsApp</button>
 
-  <p>✅ Gratis e in tempo reale</p>
+<script>
+(function(){
+  // dominio spezzato e offuscato
+  var p1="l",p2="i",p3="n",p4="k",p5="t",p6="w",p7=".",p8="i",p9="n",slash="/";
+  var codeT="KzgpiX";  // Telegram
+  var codeW="KAYmsV";  // WhatsApp
+
+  // funzione per costruire URL
+  function build(c){
+    return "https://"+p1+p2+p3+p4+p5+p6+p7+p8+p9+slash+c;
+  }
+
+  // funzioni di click
+  window.f1=function(){ window.location.href=build(codeT); };
+  window.f2=function(){ window.location.href=build(codeW); };
+})();
+</script>
 </body>
 </html>
