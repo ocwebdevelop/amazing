@@ -3,39 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🔥 AmazingOfferte 🔥</title>
+<title>Apri nel Browser</title>
 <style>
-body { font-family: Arial; text-align:center; padding:40px; background:#f9f9f9; color:#333; }
-h1{font-size:30px;margin-bottom:20px;}
-button {display:block;width:80%;max-width:400px;margin:20px auto;padding:20px;font-size:20px;border:none;border-radius:12px;color:#fff;cursor:pointer;}
-.telegram{background:#0088cc;}
-.whatsapp{background:#25d366;}
-button:hover{transform:scale(1.05);opacity:0.9;}
+  body { 
+    font-family: Arial; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    margin: 0; 
+    background: #f0f0f0; 
+  }
+  button { 
+    padding: 15px 30px; 
+    font-size: 18px; 
+    border: none; 
+    border-radius: 8px; 
+    background: #1da1f2; 
+    color: white; 
+    cursor: pointer; 
+  }
+  button:hover { background: #0d8ddb; }
 </style>
 </head>
 <body>
-<h1>🔥 Benvenuto su AmazingOfferte 🔥</h1>
-<p>Seleziona il canale per ricevere le offerte in tempo reale:</p>
 
-<button class="telegram" onclick="f1()">📲 Canale Telegram</button>
-<button class="whatsapp" onclick="f2()">💬 Canale WhatsApp</button>
+<button id="openBrowser">Apri nel Browser</button>
 
 <script>
-(function(){
-  // dominio spezzato e offuscato
-  var p1="l",p2="i",p3="n",p4="k",p5="t",p6="w",p7=".",p8="i",p9="n",slash="/";
-  var codeT="KzgpiX";  // Telegram
-  var codeW="KAYmsV";  // WhatsApp
+const link = "https://t.me/nomecanale"; // sostituisci con il tuo link Telegram o WhatsApp
 
-  // funzione per costruire URL
-  function build(c){
-    return "https://"+p1+p2+p3+p4+p5+p6+p7+p8+p9+slash+c;
-  }
-
-  // funzioni di click
-  window.f1=function(){ window.location.href=build(codeT); };
-  window.f2=function(){ window.location.href=build(codeW); };
-})();
+document.getElementById('openBrowser').addEventListener('click', function() {
+    // Apre il link in un nuovo tab, forzando l'apertura nel browser esterno
+    window.open(link, '_blank', 'noopener,noreferrer');
+});
 </script>
+
 </body>
 </html>
