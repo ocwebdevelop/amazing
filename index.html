@@ -1,43 +1,111 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apri nel Browser</title>
-<style>
-  body { 
-    font-family: Arial; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    height: 100vh; 
-    margin: 0; 
-    background: #f0f0f0; 
-  }
-  button { 
-    padding: 15px 30px; 
-    font-size: 18px; 
-    border: none; 
-    border-radius: 8px; 
-    background: #1da1f2; 
-    color: white; 
-    cursor: pointer; 
-  }
-  button:hover { background: #0d8ddb; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AmazingOfferte - Accedi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      color: #222;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+    }
+
+    .steps {
+      background: #fff;
+      padding: 15px 20px;
+      border-radius: 14px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      font-size: 1rem;
+      line-height: 1.5;
+      max-width: 340px;
+    }
+
+    .steps p {
+      margin: 8px 0;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: white;
+      display: block;
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .telegram { background-color: #0088cc; }
+    .whatsapp { background-color: #25d366; }
+
+    .warning {
+      font-size: 1.1rem;
+      color: red;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
 
-<button id="openBrowser">Apri nel Browser</button>
+  <h1>Accedi ad AmazingOfferte 🚀</h1>
 
-<script>
-const link = "https://t.me/nomecanale"; // sostituisci con il tuo link Telegram o WhatsApp
+  <div class="steps">
+    <p>👉 <b>iPhone</b>: clicca sui 3 puntini e scegli <b>“Apri in Safari”</b></p>
+    <p>👉 <b>Android</b>: clicca sui 3 puntini e scegli <b>“Apri in Chrome”</b></p>
+  </div>
 
-document.getElementById('openBrowser').addEventListener('click', function() {
-    // Apre il link in un nuovo tab, forzando l'apertura nel browser esterno
-    window.open(link, '_blank', 'noopener,noreferrer');
-});
-</script>
+  <div class="buttons" id="buttons">
+    <a href="https://t.me/tuoCanaleTelegram" class="btn telegram">🔵 Entra su Telegram</a>
+    <a href="https://wa.me/tuoNumeroWhatsApp" class="btn whatsapp">🟢 Entra su WhatsApp</a>
+  </div>
+
+  <div class="warning" id="warning">
+    ⚠️ Completa i passaggi sopra prima
+  </div>
+
+  <script>
+    function isExternalBrowser() {
+      const ua = navigator.userAgent.toLowerCase();
+      const isSafari = /safari/.test(ua) && !/crios|fxios|chrome/.test(ua);
+      const isChrome = /chrome/.test(ua) && /mobile/.test(ua);
+      return isSafari || isChrome;
+    }
+
+    window.onload = function() {
+      if (isExternalBrowser()) {
+        document.getElementById("buttons").style.display = "flex";
+        document.getElementById("warning").style.display = "none";
+      }
+    }
+  </script>
 
 </body>
 </html>
