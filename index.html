@@ -90,7 +90,7 @@
 
   <h1>Accedi alle Offerte di AmazingOfferte 🚀</h1>
 
-  <div class="steps">
+  <div class="steps" id="instructions">
     <h2><u>Per poter sbloccare i pulsanti dei canali è NECESSARIO:</u></h2>
     <h2>📱 iPhone</h2>
     <p>👉 Tocca i <b>3 puntini in alto a destra</b></p>
@@ -115,15 +115,29 @@
   <script>
     function isExternalBrowser() {
       const ua = navigator.userAgent.toLowerCase();
-      const isSafari = /safari/.test(ua) && !/crios|fxios|chrome/.test(ua);
-      const isChrome = /chrome/.test(ua) && /mobile/.test(ua);
-      return isSafari || isChrome;
+
+      // Lista di webview/app interne da bloccare
+      const blocked = [
+        "instagram",
+        "fbav", "fbios", "fb_iab", "fban", // Facebook app
+        "tiktok",
+        "twitter",
+        "line",
+        "wechat"
+      ];
+
+      for (const b of blocked) {
+        if (ua.includes(b)) return false;
+      }
+
+      return true; // tutto il resto è browser esterno
     }
 
     window.onload = function() {
       if (isExternalBrowser()) {
         document.getElementById("buttons").style.display = "flex";
         document.getElementById("warning").style.display = "none";
+        document.getElementById("instructions").style.display = "none";
       }
     }
   </script>
