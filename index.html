@@ -92,6 +92,7 @@
 
   <div class="steps" id="instructions">
     <h2><u>Per poter sbloccare i pulsanti dei canali è NECESSARIO:</u></h2>
+
     <h2>📱 iPhone</h2>
     <p>👉 Tocca i <b>3 puntini in alto a destra</b></p>
     <p>👉 Seleziona <b>“Apri nel browser”</b></p>
@@ -113,28 +114,22 @@
   </div>
 
   <script>
-    function isExternalBrowser() {
+    function isInWebview() {
       const ua = navigator.userAgent.toLowerCase();
+      const isIOS = /iphone|ipad|ipod/.test(ua);
+      const isAndroid = /android/.test(ua);
 
-      // Lista di webview/app interne da bloccare
-      const blocked = [
-        "instagram",
-        "fbav", "fbios", "fb_iab", "fban", // Facebook app
-        "tiktok",
-        "twitter",
-        "line",
-        "wechat"
-      ];
+      // iOS webview: Safari non presente oppure no standalone
+      const iosWebview = isIOS && !window.navigator.standalone && !ua.includes("safari");
 
-      for (const b of blocked) {
-        if (ua.includes(b)) return false;
-      }
+      // Android webview: contiene "wv" oppure "version/x.x"
+      const androidWebview = isAndroid && (ua.includes("wv") || /version\/\d+\.\d+/.test(ua));
 
-      return true; // tutto il resto è browser esterno
+      return iosWebview || androidWebview;
     }
 
     window.onload = function() {
-      if (isExternalBrowser()) {
+      if (!isInWebview()) {
         document.getElementById("buttons").style.display = "flex";
         document.getElementById("warning").style.display = "none";
         document.getElementById("instructions").style.display = "none";
