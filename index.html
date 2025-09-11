@@ -106,10 +106,7 @@
   <div class="warning" id="warning">
     🔒 Completa il passaggio sopra per sbloccare i pulsanti ai canali
   </div>
-  <br>
-  <br>
-  <br>
-  <a href="https://hits.sh/ocwebdevelop.github.io/amazing-offerte-page/"><img alt="Hits" src="https://hits.sh/ocwebdevelop.github.io/amazing-offerte-page.svg?color=00d4ff"/></a>
+
   <script>
     function isInWebview() {
       const ua = navigator.userAgent.toLowerCase();
@@ -132,6 +129,13 @@
         document.getElementById("instructions").style.display = "none";
       }
     }
+
+    // ✅ Inietta il contatore solo ora
+      const counter = document.createElement("img");
+      counter.src = "https://hits.sh/ocwebdevelop.github.io/amazing-offerte-page.svg?color=00d4ff";
+      counter.alt = "Hits";
+      counter.style.marginTop = "20px";
+      document.body.appendChild(counter);
   </script>
 
 </body>
