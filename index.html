@@ -20,35 +20,40 @@
     }
 
     h1 {
-      font-size: 1.8rem;
+      font-size: 1.9rem;
       margin-bottom: 20px;
       color: #111;
     }
 
     .steps {
       background: #fff;
-      padding: 18px 22px;
-      border-radius: 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 22px 26px;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
       font-size: 1rem;
       line-height: 1.6;
-      max-width: 360px;
+      max-width: 380px;
+      text-align: left;
     }
 
     .steps h2 {
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-      color: #444;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      color: #333;
+      text-align: center;
     }
 
     .steps p {
-      margin: 6px 0;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.05rem;
     }
 
-    .separator {
-      border: none;
-      border-top: 1px solid #ddd;
-      margin: 15px 0;
+    .steps p span {
+      font-weight: bold;
+      color: #0088cc;
     }
 
     .buttons {
@@ -63,23 +68,24 @@
     .btn {
       text-decoration: none;
       padding: 14px;
-      border-radius: 10px;
+      border-radius: 12px;
       font-size: 1.1rem;
       font-weight: bold;
       color: white;
       display: block;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .btn:hover {
       transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     .telegram { background-color: #0088cc; }
     .whatsapp { background-color: #25d366; }
 
     .warning {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: red;
       margin-top: 20px;
       font-weight: bold;
@@ -91,17 +97,10 @@
   <h1>Accedi alle Offerte di AmazingOfferte 🚀</h1>
 
   <div class="steps" id="instructions">
-    <h2><u>Per poter sbloccare i pulsanti dei canali è NECESSARIO:</u></h2>
-
-    <h2>📱 iPhone</h2>
-    <p>👉 Tocca i <b>3 puntini in alto a destra</b></p>
-    <p>👉 Seleziona <b>“Apri nel browser”</b></p>
-
-    <hr class="separator">
-
-    <h2>🤖 Android</h2>
-    <p>👉 Tocca i <b>3 puntini in alto a destra</b></p>
-    <p>👉 Seleziona <b>“Apri nel browser”</b></p>
+    <h2>🔑 Per sbloccare i pulsanti dei canali:</h2>
+    <p>👉 Tocca i <span>3 puntini in alto a destra</span></p>
+    <p>👉 Seleziona <span>“Apri nel browser”</span></p>
+    <p style="margin-top:12px; text-align:center; font-size:0.95rem; color:#555;">(Funziona sia su 📱 iPhone che su 🤖 Android)</p>
   </div>
 
   <div class="buttons" id="buttons">
