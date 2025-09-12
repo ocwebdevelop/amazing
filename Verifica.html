@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AmazingOfferte - Monitoraggio Hits</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 20px;
+      color: #222;
+    }
+    h1 { text-align: center; color: #0088cc; }
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card h2 { margin-bottom: 15px; color: #333; }
+    .card img { margin-bottom: 10px; }
+    .info { margin-top: 30px; text-align: center; font-size: 0.95rem; color: #555; }
+  </style>
+</head>
+<body>
+
+  <h1>Monitoraggio AmazingOfferte 🚀</h1>
+
+  <div class="container">
+    <div class="card">
+      <h2>Visite Webview</h2>
+      <img src="https://hits.sh/ocwebdevelop.github.io/landing-webview-v2.svg" alt="Hits Webview">
+      <p>Numero di utenti che hanno aperto la landing in webview</p>
+    </div>
+
+    <div class="card">
+      <h2>Visite Browser</h2>
+      <img src="https://hits.sh/ocwebdevelop.github.io/landing-browser-v2.svg" alt="Hits Browser">
+      <p>Numero di utenti che hanno aperto la landing in browser normale</p>
+    </div>
+
+    <div class="card">
+      <h2>Clic Telegram</h2>
+      <img src="https://hits.sh/ocwebdevelop.github.io/redirect-telegram-v2.svg" alt="Hits Telegram">
+      <p>Numero di utenti che hanno cliccato il pulsante Telegram</p>
+    </div>
+
+    <div class="card">
+      <h2>Clic WhatsApp</h2>
+      <img src="https://hits.sh/ocwebdevelop.github.io/redirect-whatsapp-v2.svg" alt="Hits WhatsApp">
+      <p>Numero di utenti che hanno cliccato il pulsante WhatsApp</p>
+    </div>
+  </div>
+
+  <div class="info">
+    <p>🔹 Drop-off stimato: <strong id="dropoff">-</strong></p>
+    <p>🔹 Aggiornamento automatico ogni volta che ricarichi la pagina</p>
+    <p>🔹 La differenza tra visite Browser/Webview e clic sui pulsanti ti aiuta a capire dove si ferma l’utente</p>
+  </div>
+
+  <script>
+    // Calcolo drop-off stimato
+    function calcDropoff() {
+      const webviewHits = parseInt(document.querySelector('img[alt="Hits Webview"]').src.split('label=')[1]) || 0;
+      const browserHits = parseInt(document.querySelector('img[alt="Hits Browser"]').src.split('label=')[1]) || 0;
+      const telegramHits = parseInt(document.querySelector('img[alt="Hits Telegram"]').src.split('label=')[1]) || 0;
+      const whatsappHits = parseInt(document.querySelector('img[alt="Hits WhatsApp"]').src.split('label=')[1]) || 0;
+
+      // Totale visite alla landing
+      const totalLanding = webviewHits + browserHits;
+      // Totale clic pulsanti
+      const totalClicks = telegramHits + whatsappHits;
+      const dropoffPercent = totalLanding > 0 ? Math.round(((totalLanding - totalClicks)/totalLanding)*100) : 0;
+
+      document.getElementById('dropoff').textContent = dropoffPercent + "%";
+    }
+
+    // Aggiorna il drop-off all'onload
+    window.onload = calcDropoff;
+  </script>
+</body>
+</html>
