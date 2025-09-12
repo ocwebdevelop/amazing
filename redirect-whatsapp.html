@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirect WhatsApp</title>
+  <meta http-equiv="refresh" content="0; url=https://whatsapp.com/channel/0029Vb9MchsBlHpXCb23sp41">
+</head>
+<body>
+  <p>Reindirizzamento a WhatsApp...</p>
+  <script>
+    function isOwner() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("me") === "true";
+    }
+    if (!isOwner()) {
+      const counter = document.createElement("img");
+      counter.src = "https://hits.sh/redirect-whatsapp.svg?color=25d366";
+      counter.alt = "Hits WhatsApp";
+      counter.style.display = "none";
+      document.body.appendChild(counter);
+    }
+  </script>
+</body>
+</html>

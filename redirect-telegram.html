@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirect Telegram</title>
+  <meta http-equiv="refresh" content="0; url=https://t.me/amazingofferte">
+</head>
+<body>
+  <p>Reindirizzamento a Telegram...</p>
+  <script>
+    function isOwner() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("me") === "true";
+    }
+    if (!isOwner()) {
+      const counter = document.createElement("img");
+      counter.src = "https://hits.sh/redirect-telegram.svg?color=0088cc";
+      counter.alt = "Hits Telegram";
+      counter.style.display = "none";
+      document.body.appendChild(counter);
+    }
+  </script>
+</body>
+</html>
