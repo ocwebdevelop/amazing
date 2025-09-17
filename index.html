@@ -58,7 +58,7 @@ h1 { font-size: 2rem; margin-bottom: 20px; color: #111; }
 .whatsapp { background-color: #25d366; }
 .warning { font-size: 1.15rem; color: red; margin-top: 20px; font-weight: bold; }
 
-/* POPUP EXIT INTENT */
+/* POPUP */
 #exitPopup {
   position: fixed;
   top:0; left:0;
@@ -139,7 +139,7 @@ h1 { font-size: 2rem; margin-bottom: 20px; color: #111; }
   🔒 Completa il passaggio sopra per sbloccare i pulsanti ai canali
 </div>
 
-<!-- POPUP EXIT INTENT -->
+<!-- POPUP -->
 <div id="exitPopup">
   <div class="popup-content">
     <h2>⏳ Ehi, aspetta!</h2>
@@ -157,7 +157,7 @@ function isInWebview() {
   const isIOS = /iphone|ipad|ipod/.test(ua);
   const isAndroid = /android/.test(ua);
   const iosWebview = isIOS && !window.navigator.standalone && !ua.includes("safari");
-  const androidWebview = isAndroid && (ua.includes("wv") || /version\/\\d+\\.\\d+/.test(ua));
+  const androidWebview = isAndroid && (ua.includes("wv") || /version\/\d+.\d+/.test(ua));
   return iosWebview || androidWebview;
 }
 function isOwner() {
@@ -166,8 +166,6 @@ function isOwner() {
 }
 
 window.onload = function() {
-  const arrow = document.getElementById("arrow");
-
   if (isInWebview() && !isOwner()) {
     const counterWebview = document.createElement("img");
     counterWebview.src = "https://hits.sh/ocwebdevelop.github.io/landing-webview-v2.svg";
@@ -175,33 +173,14 @@ window.onload = function() {
     counterWebview.style.display = "none";
     document.body.appendChild(counterWebview);
 
-    let popupShown = false;
     const popup = document.getElementById("exitPopup");
     const popupBtn = document.getElementById("popupBtn");
-    let allowPopup = false;
 
-    // abilita popup dopo 3 secondi
-    setTimeout(()=>{ allowPopup = true; }, 3000);
-
-    function showPopup() {
-      if (!popupShown && allowPopup) {
-        popup.style.display = "flex";
-        popupShown = true;
-        if (navigator.vibrate) { navigator.vibrate(150); }
-      }
-    }
-
-    // exit intent desktop
-    document.addEventListener("mouseleave", (e)=>{
-      if(e.clientY < 0){ showPopup(); }
-    });
-
-    // touch mobile
-    document.addEventListener("touchstart", ()=>{
-      if (allowPopup) {
-        showPopup();
-      }
-    });
+    // Mostra popup dopo 6 secondi automaticamente
+    setTimeout(()=>{
+      popup.style.display = "flex";
+      if (navigator.vibrate) { navigator.vibrate(150); }
+    }, 6000);
 
     popupBtn.onclick = function(e){
       e.preventDefault();
