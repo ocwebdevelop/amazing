@@ -17,8 +17,9 @@
       height: 100vh;
       text-align: center;
       color: #222;
+      overflow: hidden;
     }
-    h1 { font-size: 1.9rem; margin-bottom: 20px; color: #111; }
+    h1 { font-size: 2rem; margin-bottom: 20px; color: #111; }
     .steps {
       background: #fff;
       padding: 30px 26px;
@@ -28,6 +29,7 @@
       line-height: 1.6;
       max-width: 380px;
       text-align: center;
+      transition: transform 0.3s ease;
     }
     .steps h2 { font-size: 1.2rem; margin-bottom: 20px; color: #333; }
     .steps p { margin: 14px 0; font-size: 1.05rem; }
@@ -42,7 +44,7 @@
     }
     .btn {
       text-decoration: none;
-      padding: 14px;
+      padding: 16px;
       border-radius: 12px;
       font-size: 1.1rem;
       font-weight: bold;
@@ -50,71 +52,130 @@
       display: block;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
     .telegram { background-color: #0088cc; }
     .whatsapp { background-color: #25d366; }
     .warning { font-size: 1.15rem; color: red; margin-top: 20px; font-weight: bold; }
+    
+    /* POPUP EXIT INTENT */
+    #exitPopup {
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      justify-content:center;
+      align-items:center;
+      z-index: 999;
+    }
+    #exitPopup .popup-content {
+      background:#fff;
+      padding: 30px;
+      border-radius: 16px;
+      text-align:center;
+      max-width: 320px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+      animation: popIn 0.3s ease forwards;
+    }
+    #exitPopup h2 { color: #111; margin-bottom: 15px; }
+    #exitPopup p { margin-bottom: 20px; }
+    #exitPopup .popup-btn {
+      display:block;
+      padding:14px;
+      border-radius:12px;
+      background:#0088cc;
+      color:white;
+      font-weight:bold;
+      text-decoration:none;
+      transition: transform 0.2s ease;
+    }
+    #exitPopup .popup-btn:hover { transform: scale(1.05); }
+    @keyframes popIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
   </style>
 </head>
 <body>
 
-  <h1>Accedi alle Offerte di AmazingOfferte 🚀</h1>
+<h1>Accedi alle Offerte di AmazingOfferte 🚀</h1>
 
-  <div class="steps" id="instructions">
-    <h2>🔑 Per sbloccare i pulsanti dei canali:</h2>
-    <p>👉 Tocca i <span>3 puntini in alto a destra</span></p>
-    <p>👉 Seleziona <span>“Apri nel browser”</span></p>
+<div class="steps" id="instructions">
+  <h2>🔑 Per sbloccare i pulsanti dei canali:</h2>
+  <p>👉 Tocca i <span>3 puntini in alto a destra</span></p>
+  <p>👉 Seleziona <span>“Apri nel browser”</span></p>
+</div>
+
+<div class="buttons" id="buttons">
+  <a href="redirect-telegram.html" class="btn telegram">🔵 Entra su Telegram</a>
+  <a href="redirect-whatsapp.html" class="btn whatsapp">🟢 Entra su WhatsApp</a>
+</div>
+
+<div class="warning" id="warning">
+  🔒 Completa il passaggio sopra per sbloccare i pulsanti ai canali
+</div>
+
+<!-- POPUP EXIT INTENT -->
+<div id="exitPopup">
+  <div class="popup-content">
+    <h2>⏳ Ehi, aspetta!</h2>
+    <p>So che stai per chiudere la pagina, ma <strong>le offerte migliori ti aspettano</strong>! Non perderle!</p>
+    <a href="#" id="popupBtn" class="popup-btn">Apri nel browser e continua</a>
   </div>
+</div>
 
-  <div class="buttons" id="buttons">
-    <a href="redirect-telegram.html" class="btn telegram">🔵 Entra su Telegram</a>
-    <a href="redirect-whatsapp.html" class="btn whatsapp">🟢 Entra su WhatsApp</a>
-  </div>
+<script>
+  function isInWebview() {
+    const ua = navigator.userAgent.toLowerCase();
+    const isIOS = /iphone|ipad|ipod/.test(ua);
+    const isAndroid = /android/.test(ua);
+    const iosWebview = isIOS && !window.navigator.standalone && !ua.includes("safari");
+    const androidWebview = isAndroid && (ua.includes("wv") || /version\/\d+\.\d+/.test(ua));
+    return iosWebview || androidWebview;
+  }
 
-  <div class="warning" id="warning">
-    🔒 Completa il passaggio sopra per sbloccare i pulsanti ai canali
-  </div>
+  function isOwner() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("me") === "true";
+  }
 
-  <script>
-    function isInWebview() {
-      const ua = navigator.userAgent.toLowerCase();
-      const isIOS = /iphone|ipad|ipod/.test(ua);
-      const isAndroid = /android/.test(ua);
-      const iosWebview = isIOS && !window.navigator.standalone && !ua.includes("safari");
-      const androidWebview = isAndroid && (ua.includes("wv") || /version\/\d+\.\d+/.test(ua));
-      return iosWebview || androidWebview;
-    }
+  window.onload = function() {
+    if (isInWebview() && !isOwner()) {
+      // Mostra hits
+      const counterWebview = document.createElement("img");
+      counterWebview.src = "https://hits.sh/ocwebdevelop.github.io/landing-webview-v2.svg";
+      counterWebview.alt = "Hits Webview";
+      counterWebview.style.display = "none";
+      document.body.appendChild(counterWebview);
 
-    function isOwner() {
-      const params = new URLSearchParams(window.location.search);
-      return params.get("me") === "true";
-    }
-
-    window.onload = function() {
-      // 1️⃣ Hits in webview
-      if (isInWebview() && !isOwner()) {
-        const counterWebview = document.createElement("img");
-        counterWebview.src = "https://hits.sh/ocwebdevelop.github.io/landing-webview-v2.svg";
-        counterWebview.alt = "Hits Webview";
-        counterWebview.style.display = "none";
-        document.body.appendChild(counterWebview);
-      }
-
-      // 2️⃣ Se non webview → mostra pulsanti e contatore browser
-      if (!isInWebview()) {
-        document.getElementById("buttons").style.display = "flex";
-        document.getElementById("warning").style.display = "none";
-        document.getElementById("instructions").style.display = "none";
-
-        if (!isOwner()) {
-          const counterBrowser = document.createElement("img");
-          counterBrowser.src = "https://hits.sh/ocwebdevelop.github.io/landing-browser-v2.svg";
-          counterBrowser.alt = "Hits Browser";
-          counterBrowser.style.display = "none";
-          document.body.appendChild(counterBrowser);
+      // EXIT INTENT
+      document.addEventListener("mouseleave", function(e){
+        if(e.clientY < 0){
+          document.getElementById("exitPopup").style.display = "flex";
         }
+      });
+
+      // Pulsante popup
+      document.getElementById("popupBtn").onclick = function(e){
+        e.preventDefault();
+        alert("Ora tocca tu: usa i 3 puntini > Apri nel browser");
+      };
+    }
+
+    if (!isInWebview()) {
+      document.getElementById("buttons").style.display = "flex";
+      document.getElementById("warning").style.display = "none";
+      document.getElementById("instructions").style.display = "none";
+
+      if (!isOwner()) {
+        const counterBrowser = document.createElement("img");
+        counterBrowser.src = "https://hits.sh/ocwebdevelop.github.io/landing-browser-v2.svg";
+        counterBrowser.alt = "Hits Browser";
+        counterBrowser.style.display = "none";
+        document.body.appendChild(counterBrowser);
       }
     }
-  </script>
+  }
+</script>
 </body>
 </html>
