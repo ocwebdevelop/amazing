@@ -5,95 +5,108 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AmazingOfferte - Accedi</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #d9f0ff, #a8d8ff);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-    color: #222;
-    overflow: hidden;
-  }
-  h1 { font-size: 2rem; margin-bottom: 20px; color: #111; }
-  .steps {
-    background: #fff;
-    padding: 30px 26px;
-    border-radius: 16px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-    font-size: 1rem;
-    line-height: 1.6;
-    max-width: 380px;
-    text-align: center;
-    transition: transform 0.3s ease;
-  }
-  .steps h2 { font-size: 1.2rem; margin-bottom: 20px; color: #333; }
-  .steps p { margin: 14px 0; font-size: 1.05rem; }
-  .steps p span { font-weight: bold; color: #0088cc; }
-  .buttons {
-    margin-top: 25px;
-    display: none;
-    flex-direction: column;
-    gap: 14px;
-    width: 100%;
-    max-width: 280px;
-  }
-  .btn {
-    text-decoration: none;
-    padding: 16px;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: white;
-    display: block;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-  .telegram { background-color: #0088cc; }
-  .whatsapp { background-color: #25d366; }
-  .warning { font-size: 1.15rem; color: red; margin-top: 20px; font-weight: bold; }
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #d9f0ff, #a8d8ff);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  color: #222;
+  overflow: hidden;
+}
+h1 { font-size: 2rem; margin-bottom: 20px; color: #111; }
+.steps {
+  background: #fff;
+  padding: 30px 26px;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 380px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+.steps h2 { font-size: 1.2rem; margin-bottom: 20px; color: #333; }
+.steps p { margin: 14px 0; font-size: 1.05rem; }
+.steps p span { font-weight: bold; color: #0088cc; }
+.buttons {
+  margin-top: 25px;
+  display: none;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 280px;
+}
+.btn {
+  text-decoration: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  display: block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: pulse 1.5s infinite;
+}
+.btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+.telegram { background-color: #0088cc; }
+.whatsapp { background-color: #25d366; }
+.warning { font-size: 1.15rem; color: red; margin-top: 20px; font-weight: bold; }
 
-  /* POPUP EXIT INTENT */
-  #exitPopup {
-    position: fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background: rgba(0,0,0,0.7);
-    display: none;
-    justify-content:center;
-    align-items:center;
-    z-index: 999;
-  }
-  #exitPopup .popup-content {
-    background:#fff;
-    padding: 30px;
-    border-radius: 16px;
-    text-align:center;
-    max-width: 320px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-    animation: popIn 0.3s ease forwards;
-  }
-  #exitPopup h2 { color: #111; margin-bottom: 15px; }
-  #exitPopup p { margin-bottom: 20px; }
-  #exitPopup .popup-btn {
-    display:block;
-    padding:14px;
-    border-radius:12px;
-    background:#0088cc;
-    color:white;
-    font-weight:bold;
-    text-decoration:none;
-    transition: transform 0.2s ease;
-  }
-  #exitPopup .popup-btn:hover { transform: scale(1.05); }
-  @keyframes popIn {
-    from { transform: scale(0.5); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
+/* POPUP EXIT INTENT */
+#exitPopup {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content:center;
+  align-items:center;
+  z-index: 999;
+}
+#exitPopup .popup-content {
+  background:#fff;
+  padding: 30px;
+  border-radius: 16px;
+  text-align:center;
+  max-width: 320px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  animation: popIn 0.3s ease forwards;
+}
+#exitPopup h2 { color: #111; margin-bottom: 10px; }
+#exitPopup p { margin-bottom: 20px; font-size: 1rem; }
+#exitPopup .popup-btn {
+  display:block;
+  padding:14px;
+  border-radius:12px;
+  background:#0088cc;
+  color:white;
+  font-weight:bold;
+  text-decoration:none;
+  transition: transform 0.2s ease;
+  animation: pulse 1.5s infinite;
+}
+#exitPopup .popup-btn:hover { transform: scale(1.05); }
+
+@keyframes popIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+#countdown {
+  font-weight:bold;
+  color:#e53935;
+  margin-bottom:10px;
+}
 </style>
 </head>
 <body>
@@ -119,7 +132,8 @@
 <div id="exitPopup">
   <div class="popup-content">
     <h2>⏳ Ehi, aspetta!</h2>
-    <p>Le migliori offerte ti aspettano! Apri la pagina nel browser per non perderle!</p>
+    <p id="popupMessage">So che stai per chiudere la pagina, ma <strong>le offerte migliori ti aspettano</strong>! Non perderle!</p>
+    <div id="countdown">Apre il browser in: 5s</div>
     <a href="#" id="popupBtn" class="popup-btn">Apri nel browser e continua</a>
   </div>
 </div>
@@ -133,7 +147,6 @@ function isInWebview() {
   const androidWebview = isAndroid && (ua.includes("wv") || /version\/\d+\.\d+/.test(ua));
   return iosWebview || androidWebview;
 }
-
 function isOwner() {
   const params = new URLSearchParams(window.location.search);
   return params.get("me") === "true";
@@ -148,19 +161,49 @@ window.onload = function() {
     counterWebview.style.display = "none";
     document.body.appendChild(counterWebview);
 
-    // POPUP MOBILE (timeout automatico)
-    setTimeout(function() {
-      document.getElementById("exitPopup").style.display = "flex";
-    }, 5000);
+    // EXIT INTENT
+    let popupShown = false;
+    const popup = document.getElementById("exitPopup");
+    const popupBtn = document.getElementById("popupBtn");
+    const countdownEl = document.getElementById("countdown");
+    const popupMessage = document.getElementById("popupMessage");
 
-    // Pulsante popup
-    document.getElementById("popupBtn").onclick = function(e){
+    function showPopup() {
+      if (!popupShown) {
+        popup.style.display = "flex";
+        popupShown = true;
+
+        // Vibrazione breve su mobile
+        if (navigator.vibrate) { navigator.vibrate(150); }
+
+        // Countdown 5 secondi
+        let timeLeft = 5;
+        countdownEl.textContent = `Apre il browser in: ${timeLeft}s`;
+        const countdown = setInterval(() => {
+          timeLeft--;
+          countdownEl.textContent = `Apre il browser in: ${timeLeft}s`;
+          if(timeLeft <= 0) {
+            clearInterval(countdown);
+            alert("Ora tocca a te: usa i 3 puntini > Apri nel browser");
+          }
+        }, 1000);
+      }
+    }
+
+    document.addEventListener("mouseleave", function(e){
+      if(e.clientY < 0){ showPopup(); }
+    });
+
+    document.addEventListener("touchstart", function(e){
+      showPopup();
+    }, { once: true });
+
+    popupBtn.onclick = function(e){
       e.preventDefault();
       alert("Ora tocca a te: usa i 3 puntini > Apri nel browser");
     };
-  }
 
-  if (!isInWebview()) {
+  } else {
     document.getElementById("buttons").style.display = "flex";
     document.getElementById("warning").style.display = "none";
     document.getElementById("instructions").style.display = "none";
@@ -173,7 +216,7 @@ window.onload = function() {
       document.body.appendChild(counterBrowser);
     }
   }
-}
+};
 </script>
 </body>
 </html>
