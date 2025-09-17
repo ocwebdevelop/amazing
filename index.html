@@ -78,8 +78,8 @@ h1 { font-size: 2rem; margin-bottom: 20px; color: #111; }
   box-shadow: 0 6px 16px rgba(0,0,0,0.2);
   animation: popIn 0.3s ease forwards;
 }
-#exitPopup h2 { color: #111; margin-bottom: 10px; }
-#exitPopup p { margin-bottom: 20px; font-size: 1rem; }
+#exitPopup h2 { color: #111; margin-bottom: 15px; font-size: 1.4rem; }
+#exitPopup p { margin-bottom: 20px; font-size: 1.2rem; }
 #exitPopup .popup-btn {
   display:block;
   padding:14px;
@@ -101,11 +101,6 @@ h1 { font-size: 2rem; margin-bottom: 20px; color: #111; }
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
-}
-#countdown {
-  font-weight:bold;
-  color:#e53935;
-  margin-bottom:10px;
 }
 </style>
 </head>
@@ -133,7 +128,6 @@ h1 { font-size: 2rem; margin-bottom: 20px; color: #111; }
   <div class="popup-content">
     <h2>⏳ Ehi, aspetta!</h2>
     <p id="popupMessage">So che stai per chiudere la pagina, ma <strong>le offerte migliori ti aspettano</strong>! Non perderle!</p>
-    <div id="countdown">Apre il browser in: 5s</div>
     <a href="#" id="popupBtn" class="popup-btn">Apri nel browser e continua</a>
   </div>
 </div>
@@ -154,39 +148,25 @@ function isOwner() {
 
 window.onload = function() {
   if (isInWebview() && !isOwner()) {
-    // Mostra hits
     const counterWebview = document.createElement("img");
     counterWebview.src = "https://hits.sh/ocwebdevelop.github.io/landing-webview-v2.svg";
     counterWebview.alt = "Hits Webview";
     counterWebview.style.display = "none";
     document.body.appendChild(counterWebview);
 
-    // EXIT INTENT
     let popupShown = false;
     const popup = document.getElementById("exitPopup");
     const popupBtn = document.getElementById("popupBtn");
-    const countdownEl = document.getElementById("countdown");
-    const popupMessage = document.getElementById("popupMessage");
+
+    // blocca popup per i primi 3 secondi
+    let allowPopup = false;
+    setTimeout(()=>{ allowPopup = true; }, 3000);
 
     function showPopup() {
-      if (!popupShown) {
+      if (!popupShown && allowPopup) {
         popup.style.display = "flex";
         popupShown = true;
-
-        // Vibrazione breve su mobile
         if (navigator.vibrate) { navigator.vibrate(150); }
-
-        // Countdown 5 secondi
-        let timeLeft = 5;
-        countdownEl.textContent = `Apre il browser in: ${timeLeft}s`;
-        const countdown = setInterval(() => {
-          timeLeft--;
-          countdownEl.textContent = `Apre il browser in: ${timeLeft}s`;
-          if(timeLeft <= 0) {
-            clearInterval(countdown);
-            alert("Ora tocca a te: usa i 3 puntini > Apri nel browser");
-          }
-        }, 1000);
       }
     }
 
