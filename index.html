@@ -78,8 +78,8 @@ h1 { font-size: 2rem; margin-bottom: 20px; color: #111; }
   box-shadow: 0 6px 16px rgba(0,0,0,0.2);
   animation: popIn 0.3s ease forwards;
 }
-#exitPopup h2 { color: #111; margin-bottom: 15px; font-size: 1.4rem; }
-#exitPopup p { margin-bottom: 20px; font-size: 1.2rem; }
+#exitPopup h2 { color: #111; margin-bottom: 15px; font-size: 1.5rem; }
+#exitPopup p { margin-bottom: 20px; font-size: 1.25rem; }
 #exitPopup .popup-btn {
   display:block;
   padding:14px;
@@ -93,6 +93,20 @@ h1 { font-size: 2rem; margin-bottom: 20px; color: #111; }
 }
 #exitPopup .popup-btn:hover { transform: scale(1.05); }
 
+/* FRECIA LAMPEGGIANTE */
+#arrow {
+  position: fixed;
+  top: 5px;
+  right: 10px;
+  font-size: 2rem;
+  color: red;
+  animation: blink 1s infinite;
+  z-index: 1000;
+}
+@keyframes blink {
+  0%,50%,100% { opacity: 1; }
+  25%,75% { opacity: 0; }
+}
 @keyframes popIn {
   from { transform: scale(0.5); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
@@ -132,6 +146,9 @@ h1 { font-size: 2rem; margin-bottom: 20px; color: #111; }
   </div>
 </div>
 
+<!-- FRECIA -->
+<div id="arrow">⬆️</div>
+
 <script>
 function isInWebview() {
   const ua = navigator.userAgent.toLowerCase();
@@ -147,6 +164,8 @@ function isOwner() {
 }
 
 window.onload = function() {
+  const arrow = document.getElementById("arrow");
+
   if (isInWebview() && !isOwner()) {
     const counterWebview = document.createElement("img");
     counterWebview.src = "https://hits.sh/ocwebdevelop.github.io/landing-webview-v2.svg";
@@ -157,26 +176,35 @@ window.onload = function() {
     let popupShown = false;
     const popup = document.getElementById("exitPopup");
     const popupBtn = document.getElementById("popupBtn");
-
-    // blocca popup per i primi 3 secondi
     let allowPopup = false;
+
+    // abilita popup dopo 3 secondi
     setTimeout(()=>{ allowPopup = true; }, 3000);
 
     function showPopup() {
       if (!popupShown && allowPopup) {
         popup.style.display = "flex";
         popupShown = true;
+        arrow.style.top = "10px"; // arrow sempre visibile sopra popup
         if (navigator.vibrate) { navigator.vibrate(150); }
       }
     }
 
-    document.addEventListener("mouseleave", function(e){
+    // exit intent
+    document.addEventListener("mouseleave", (e)=>{
       if(e.clientY < 0){ showPopup(); }
     });
 
-    document.addEventListener("touchstart", function(e){
-      showPopup();
-    }, { once: true });
+    // touch mobile
+    document.addEventListener("touchstart", ()=>{
+      if (!allowPopup) {
+        let checkInterval = setInterval(()=>{
+          if (allowPopup) { showPopup(); clearInterval(checkInterval); }
+        }, 100);
+      } else {
+        showPopup();
+      }
+    }, { once:true });
 
     popupBtn.onclick = function(e){
       e.preventDefault();
@@ -187,14 +215,6 @@ window.onload = function() {
     document.getElementById("buttons").style.display = "flex";
     document.getElementById("warning").style.display = "none";
     document.getElementById("instructions").style.display = "none";
-
-    if (!isOwner()) {
-      const counterBrowser = document.createElement("img");
-      counterBrowser.src = "https://hits.sh/ocwebdevelop.github.io/landing-browser-v2.svg";
-      counterBrowser.alt = "Hits Browser";
-      counterBrowser.style.display = "none";
-      document.body.appendChild(counterBrowser);
-    }
   }
 };
 </script>
