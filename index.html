@@ -74,12 +74,12 @@ h1 { font-size: 2rem; margin-bottom: 20px; color: #111; }
   padding: 30px;
   border-radius: 16px;
   text-align:center;
-  max-width: 320px;
+  max-width: 340px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.2);
   animation: popIn 0.3s ease forwards;
 }
-#exitPopup h2 { color: #111; margin-bottom: 15px; font-size: 1.5rem; }
-#exitPopup p { margin-bottom: 20px; font-size: 1.25rem; }
+#exitPopup h2 { color: #111; margin-bottom: 15px; font-size: 1.6rem; }
+#exitPopup p { margin-bottom: 20px; font-size: 1.35rem; }
 #exitPopup .popup-btn {
   display:block;
   padding:14px;
@@ -93,19 +93,21 @@ h1 { font-size: 2rem; margin-bottom: 20px; color: #111; }
 }
 #exitPopup .popup-btn:hover { transform: scale(1.05); }
 
-/* FRECIA LAMPEGGIANTE */
+/* FRECCIA LAMPEGGIANTE */
 #arrow {
   position: fixed;
   top: 5px;
   right: 10px;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: red;
+  text-shadow: 0 0 4px black, 0 0 8px white;
   animation: blink 1s infinite;
   z-index: 1000;
+  pointer-events: none;
 }
 @keyframes blink {
-  0%,50%,100% { opacity: 1; }
-  25%,75% { opacity: 0; }
+  0%, 100% { opacity: 1; transform: scale(1.2); }
+  50% { opacity: 0.4; transform: scale(1); }
 }
 @keyframes popIn {
   from { transform: scale(0.5); opacity: 0; }
@@ -146,7 +148,7 @@ h1 { font-size: 2rem; margin-bottom: 20px; color: #111; }
   </div>
 </div>
 
-<!-- FRECIA -->
+<!-- FRECCIA -->
 <div id="arrow">⬆️</div>
 
 <script>
@@ -155,7 +157,7 @@ function isInWebview() {
   const isIOS = /iphone|ipad|ipod/.test(ua);
   const isAndroid = /android/.test(ua);
   const iosWebview = isIOS && !window.navigator.standalone && !ua.includes("safari");
-  const androidWebview = isAndroid && (ua.includes("wv") || /version\/\d+\.\d+/.test(ua));
+  const androidWebview = isAndroid && (ua.includes("wv") || /version\/\\d+\\.\\d+/.test(ua));
   return iosWebview || androidWebview;
 }
 function isOwner() {
@@ -185,26 +187,21 @@ window.onload = function() {
       if (!popupShown && allowPopup) {
         popup.style.display = "flex";
         popupShown = true;
-        arrow.style.top = "10px"; // arrow sempre visibile sopra popup
         if (navigator.vibrate) { navigator.vibrate(150); }
       }
     }
 
-    // exit intent
+    // exit intent desktop
     document.addEventListener("mouseleave", (e)=>{
       if(e.clientY < 0){ showPopup(); }
     });
 
     // touch mobile
     document.addEventListener("touchstart", ()=>{
-      if (!allowPopup) {
-        let checkInterval = setInterval(()=>{
-          if (allowPopup) { showPopup(); clearInterval(checkInterval); }
-        }, 100);
-      } else {
+      if (allowPopup) {
         showPopup();
       }
-    }, { once:true });
+    });
 
     popupBtn.onclick = function(e){
       e.preventDefault();
@@ -215,6 +212,7 @@ window.onload = function() {
     document.getElementById("buttons").style.display = "flex";
     document.getElementById("warning").style.display = "none";
     document.getElementById("instructions").style.display = "none";
+    document.getElementById("arrow").style.display = "none";
   }
 };
 </script>
